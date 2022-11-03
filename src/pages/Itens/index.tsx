@@ -1,5 +1,5 @@
 import styles from './Itens.module.scss';
-import itens from './itens.json';
+import itens from 'data/cardapio.json';
 import Item from './Item';
 import { useState, useEffect } from 'react';
 
