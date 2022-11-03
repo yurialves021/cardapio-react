@@ -8,31 +8,31 @@ interface IOpcao {
 }
 
 interface Props {
-    filtro: Number | null,
-    setFiltro: React.Dispatch<React.SetStateAction<Number | null>>
+    filtro: number | null,
+    setFiltro: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 export default function Filtros({ filtro, setFiltro }: Props) {
 
-    function selecionarOpcao(opcao: IOpcao) {
-        if (filtro === opcao.id) return setFiltro(null)
+  function selecionarOpcao(opcao: IOpcao) {
+    if (filtro === opcao.id) return setFiltro(null);
 
-        setFiltro(opcao.id);
-    }
+    setFiltro(opcao.id);
+  }
 
-    return <div className={styles.filtros}>
-        {filtros.map((opcao) => (
+  return <div className={styles.filtros}>
+    {filtros.map((opcao) => (
 
-            <button className={
-                classNames({
-                    [styles.filtros__filtro]: true,
-                    [styles['filtros__filtro--ativo']]: filtro === opcao.id
-                })
-            }
-                key={opcao.id}
-                onClick={evento => selecionarOpcao(opcao)}>
-                {opcao.label}
-            </button>
-        ))}
-    </div>
+      <button className={
+        classNames({
+          [styles.filtros__filtro]: true,
+          [styles['filtros__filtro--ativo']]: filtro === opcao.id
+        })
+      }
+      key={opcao.id}
+      onClick={evento => selecionarOpcao(opcao)}>
+        {opcao.label}
+      </button>
+    ))}
+  </div>;
 }
