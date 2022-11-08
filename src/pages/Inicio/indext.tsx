@@ -2,11 +2,21 @@ import styles from './Inicio.module.scss';
 import cardapio from 'data/cardapio.json';
 import stylesTema from '../../styles/Tema.module.scss';
 import nossaCasa from 'assets/img/nossa_casa.png';
+import { useNavigate } from 'react-router-dom';
+import { Prato } from 'types/Prato';
 
-let listaPreferidos = [...cardapio];
-listaPreferidos = listaPreferidos.sort(() => 0.5 - Math.random()).splice(0, 3);
 
 export default function Inicio() {
+  
+  let listaPreferidos = [...cardapio];
+  listaPreferidos = listaPreferidos.sort(() => 0.5 - Math.random()).splice(0, 3);
+
+  const navigate = useNavigate();
+
+  function redirecionarPrato(prato: Prato) {
+    navigate(`/prato/${prato.id}`, { state: { prato }, replace: true });
+  }
+
   return (
     <div>
       <h3 className={stylesTema.titulo}>Destaques do Dia</h3>
@@ -16,7 +26,10 @@ export default function Inicio() {
             <div className={styles.recomendado__imagem}>
               <img src={item.photo} alt={item.title} />
             </div>
-            <button className={styles.recomendado__botao}>Ver Mais</button>
+            <button
+              className={styles.recomendado__botao}
+              onClick={() => redirecionarPrato(item)}
+            >Ver Mais</button>
           </div>
         ))}
       </div>
@@ -27,7 +40,7 @@ export default function Inicio() {
           Rua Vergueiro, 3185 <br /><br /> Vila Mariana - SP
         </div>
       </div>
-      
-    </div>
+
+    </div >
   );
 }
